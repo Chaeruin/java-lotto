@@ -6,7 +6,7 @@ import lotto.enums.WinningResult;
 
 public class IncomService {
 
-    int sumAllIncome() {
+    public int sumAllIncome() {
         int sum = 0;
         sum += WinningResult.THREE_WINNING.getWinning() * WinningResult.THREE_WINNING.getMoney();
         sum += WinningResult.FOUR_WINNING.getWinning() * WinningResult.FOUR_WINNING.getMoney();

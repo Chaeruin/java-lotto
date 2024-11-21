@@ -18,7 +18,7 @@ public class IncomeRate {
         return this.investment;
     }
 
-    public int getIncomeRate() {
-        return this.income / this.investment * 100;
+    public double getIncomeRate() {
+        return (double) this.income / this.investment * 100;
     }
 }

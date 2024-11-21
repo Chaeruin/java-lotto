@@ -9,6 +9,7 @@ import lotto.domain.Bonus;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 import java.util.List;
+import lotto.enums.ErrorMessage;
 import lotto.enums.WinningResult;
 
 public class LottoService {
@@ -18,7 +19,7 @@ public class LottoService {
 
     public Lotto getLotto() {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-        numbers.sort(Comparator.naturalOrder());
+        numbers = numbers.stream().sorted().collect(Collectors.toList());
         return new Lotto(numbers);
     }
 
@@ -45,8 +46,13 @@ public class LottoService {
         }
     }
 
-    public void countNumbers(List<Integer> result) {
-
+    public boolean bonusDuplicate(Lotto lotto, Bonus bonus) {
+        for (Integer ln: lotto.getNumbers()) {
+            if (ln == bonus.getBonus()) {
+                throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_DUPLICATE.getErrorMessage());
+            }
+        }
+        return true;
     }
 
     // 5개 볼이 매치하는 경우에만 그 로또 번호 lotto 객체로 가져와서 검증하면 됨
