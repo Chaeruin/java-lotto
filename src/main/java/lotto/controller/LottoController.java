@@ -5,6 +5,7 @@ import lotto.domain.Bonus;
 import lotto.domain.IncomeRate;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
+import lotto.enums.ErrorMessage;
 import lotto.service.IncomService;
 import lotto.service.LottoService;
 import lotto.utils.InputParser;
@@ -73,10 +74,14 @@ public class LottoController {
     public Bonus inputBonusHandler(Lotto lotto) {
         Bonus bonus = null;
         boolean isNotDuplicate = false;
-        while (bonus == null && !isNotDuplicate) {
+        while (!isNotDuplicate) {
             try {
                 bonus = InputParser.parseBonus(inputView.getBonusNumber());
-                isNotDuplicate = lottoService.bonusDuplicate(lotto, bonus);
+                if (lottoService.bonusDuplicate(lotto, bonus)) {
+                    return bonus;
+                } else {
+                    throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_DUPLICATE.getErrorMessage());
+                }
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

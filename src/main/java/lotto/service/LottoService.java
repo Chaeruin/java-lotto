@@ -49,7 +49,7 @@ public class LottoService {
     public boolean bonusDuplicate(Lotto lotto, Bonus bonus) {
         for (Integer ln: lotto.getNumbers()) {
             if (ln == bonus.getBonus()) {
-                throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_DUPLICATE.getErrorMessage());
+                return false;
             }
         }
         return true;
