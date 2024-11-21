@@ -6,7 +6,7 @@ public enum WinningResult {
     FOUR_WINNING(4, 50_000, 0, false),
     FIVE_WINNING(5, 1_500_000, 0, false),
     FIVE_BONUS_WINNING(5, 30_000_000, 0 , true),
-    SIX_BONUS_WINNING(6, 2_000_000_000, 0, false);
+    SIX_WINNING(6, 2_000_000_000, 0, false);
 
     private final int count;
     private final int money;
